@@ -3,18 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package gato1;
+
+import java.io.Console;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Cristiam
  */
-public class Gato {
+public class Gato1 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+    MDI_Principal.main(args);
+        conexionDB cn = new conexionDB();
+       
     }
     
 }

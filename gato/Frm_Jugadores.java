@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gato;
+package gato1;
 
 /**
  *
@@ -252,7 +252,7 @@ public class Frm_Jugadores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm_Jugadores().setVisible(true);
+                new MDI_Principal().setVisible(true);
             }
         });
     }

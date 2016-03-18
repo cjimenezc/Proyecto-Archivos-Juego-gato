@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gato;
+package gato1;
 
 /**
  *
@@ -402,6 +402,7 @@ public class MDI_Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MDI_Principal().setVisible(true);
+                  
             }
         });
     }
@@ -421,11 +422,14 @@ public class MDI_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel Lb_Empates;
     private javax.swing.JLabel Lb_Empates1;
     private javax.swing.JLabel Lb_Ganadas;
+    private javax.swing.JLabel Lb_Ganadas1;
     private javax.swing.JLabel Lb_Ganadas2;
     private javax.swing.JLabel Lb_Gano;
     private javax.swing.JLabel Lb_Perdidos;
+    private javax.swing.JLabel Lb_Perdidos1;
     private javax.swing.JLabel Lb_Perdidos2;
     private javax.swing.JPanel Panel2;
+    private javax.swing.JPanel Panel3;
     private javax.swing.JPanel Panel4;
     public javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel1;
@@ -436,12 +440,15 @@ public class MDI_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_A1;
     private javax.swing.JLabel lb_A3;
     private javax.swing.JLabel lblJugador2;
+    private javax.swing.JLabel lblJugador3;
     private javax.swing.JLabel lblJugador4;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
