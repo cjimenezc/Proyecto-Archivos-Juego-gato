@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gato;
+package Gato.Logica;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -22,14 +22,15 @@ import javax.persistence.Transient;
  * @author Cristiam
  */
 @Entity
-@Table(name = "Jugador", catalog = "Gato", schema = "dbo")
+@Table(name = "Jugadores", catalog = "Gato", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Jugador.findAll", query = "SELECT j FROM Jugador j"),
-    @NamedQuery(name = "Jugador.findByIDJugador", query = "SELECT j FROM Jugador j WHERE j.iDJugador = :iDJugador"),
-    @NamedQuery(name = "Jugador.findByJugador", query = "SELECT j FROM Jugador j WHERE j.jugador = :jugador"),
-    @NamedQuery(name = "Jugador.findByGanes", query = "SELECT j FROM Jugador j WHERE j.ganes = :ganes"),
-    @NamedQuery(name = "Jugador.findByPerdidas", query = "SELECT j FROM Jugador j WHERE j.perdidas = :perdidas")})
-public class Jugador implements Serializable {
+    @NamedQuery(name = "Jugadores_1.findAll", query = "SELECT j FROM Jugadores_1 j"),
+    @NamedQuery(name = "Jugadores_1.findByIDJugador", query = "SELECT j FROM Jugadores_1 j WHERE j.iDJugador = :iDJugador"),
+    @NamedQuery(name = "Jugadores_1.findByJugador", query = "SELECT j FROM Jugadores_1 j WHERE j.jugador = :jugador"),
+    @NamedQuery(name = "Jugadores_1.findByGanes", query = "SELECT j FROM Jugadores_1 j WHERE j.ganes = :ganes"),
+    @NamedQuery(name = "Jugadores_1.findByPerdidas", query = "SELECT j FROM Jugadores_1 j WHERE j.perdidas = :perdidas"),
+    @NamedQuery(name = "Jugadores_1.findByEmpates", query = "SELECT j FROM Jugadores_1 j WHERE j.empates = :empates")})
+public class Jugadores_1 implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -46,15 +47,17 @@ public class Jugador implements Serializable {
     private Integer ganes;
     @Column(name = "Perdidas")
     private Integer perdidas;
+    @Column(name = "Empates")
+    private Integer empates;
 
-    public Jugador() {
+    public Jugadores_1() {
     }
 
-    public Jugador(Integer iDJugador) {
+    public Jugadores_1(Integer iDJugador) {
         this.iDJugador = iDJugador;
     }
 
-    public Jugador(Integer iDJugador, String jugador) {
+    public Jugadores_1(Integer iDJugador, String jugador) {
         this.iDJugador = iDJugador;
         this.jugador = jugador;
     }
@@ -99,6 +102,16 @@ public class Jugador implements Serializable {
         changeSupport.firePropertyChange("perdidas", oldPerdidas, perdidas);
     }
 
+    public Integer getEmpates() {
+        return empates;
+    }
+
+    public void setEmpates(Integer empates) {
+        Integer oldEmpates = this.empates;
+        this.empates = empates;
+        changeSupport.firePropertyChange("empates", oldEmpates, empates);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -109,10 +122,10 @@ public class Jugador implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Jugador)) {
+        if (!(object instanceof Jugadores_1)) {
             return false;
         }
-        Jugador other = (Jugador) object;
+        Jugadores_1 other = (Jugadores_1) object;
         if ((this.iDJugador == null && other.iDJugador != null) || (this.iDJugador != null && !this.iDJugador.equals(other.iDJugador))) {
             return false;
         }
@@ -121,7 +134,7 @@ public class Jugador implements Serializable {
 
     @Override
     public String toString() {
-        return "gato.Jugador[ iDJugador=" + iDJugador + " ]";
+        return jugador;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

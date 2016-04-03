@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gato;
+package gato.IU;
 
-import gato.Gato_Metodos;
+import Gato.Logica.Gato_Metodos;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,13 +15,14 @@ import gato.Gato_Metodos;
  */
 public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
 
-    Gato_Metodos jugador = new Gato_Metodos();
+    public static Gato_Metodos jugador = new Gato_Metodos();
 
     /**
      * Creates new form Frm_NuevoJuego
      */
     public Frm_NuevoJuego() {
         initComponents();
+
     }
 
     /**
@@ -30,6 +33,7 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         Panel_jugador1 = new javax.swing.JPanel();
         Rdb_ListaJugador1 = new javax.swing.JRadioButton();
@@ -39,24 +43,31 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
         Lb_rifa1 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("JIMENEZ:1433;databaseName=GatoPU").createEntityManager();
+        jugadores_1Query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT j FROM Jugadores_1 j");
+        jugadores_1List = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : jugadores_1Query.getResultList();
+        jugadores_1Query1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT j FROM Jugadores_1 j");
+        jugadores_1List1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : jugadores_1Query1.getResultList();
         jPanel1 = new javax.swing.JPanel();
         Panel_jugador2 = new javax.swing.JPanel();
         Rdb_ListaJugador2 = new javax.swing.JRadioButton();
         Rdb_NuevoJugador2 = new javax.swing.JRadioButton();
         txt_NuevoJugador2 = new javax.swing.JTextField();
         Cbx_ListaJ2 = new javax.swing.JComboBox<>();
-        Lb_rifa2 = new javax.swing.JLabel();
+        LB_rifa1 = new javax.swing.JLabel();
         Panel_jugador3 = new javax.swing.JPanel();
         Rdb_ListaJugador3 = new javax.swing.JRadioButton();
         Rdb_NuevoJugador3 = new javax.swing.JRadioButton();
         txt_NuevoJugador3 = new javax.swing.JTextField();
-        Lb_rifa3 = new javax.swing.JLabel();
         Cbx_ListaJ3 = new javax.swing.JComboBox<>();
+        LB_rifa2 = new javax.swing.JLabel();
         Btn_Jugar = new javax.swing.JLabel();
         Btn_rifa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lb_Ficha1 = new javax.swing.JLabel();
         Lb_Ficha2 = new javax.swing.JLabel();
+        btn_Jugar = new javax.swing.JButton();
+        Btn_Salir = new javax.swing.JButton();
 
         Panel_jugador1.setBackground(new java.awt.Color(255, 255, 255));
         Panel_jugador1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 153), 3), "Jugador 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MS Reference Sans Serif", 0, 14), new java.awt.Color(0, 51, 153))); // NOI18N
@@ -124,6 +135,7 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16))
         );
 
+        setBorder(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -163,8 +175,12 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
 
         Cbx_ListaJ2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         Cbx_ListaJ2.setEnabled(false);
+
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jugadores_1List, Cbx_ListaJ2);
+        bindingGroup.addBinding(jComboBoxBinding);
+
         Panel_jugador2.add(Cbx_ListaJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 31, 127, -1));
-        Panel_jugador2.add(Lb_rifa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 79, 57));
+        Panel_jugador2.add(LB_rifa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 60, 50));
 
         jPanel1.add(Panel_jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 320, 170));
 
@@ -199,29 +215,33 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
 
         txt_NuevoJugador3.setEnabled(false);
         Panel_jugador3.add(txt_NuevoJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 125, 131, -1));
-        Panel_jugador3.add(Lb_rifa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 57, 55));
 
         Cbx_ListaJ3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         Cbx_ListaJ3.setEnabled(false);
+
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jugadores_1List1, Cbx_ListaJ3);
+        bindingGroup.addBinding(jComboBoxBinding);
+
         Panel_jugador3.add(Cbx_ListaJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 31, 131, -1));
+        Panel_jugador3.add(LB_rifa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 60, 50));
 
         jPanel1.add(Panel_jugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 320, 170));
 
-        Btn_Jugar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Cristiam\\Desktop\\button-play.png")); // NOI18N
+        Btn_Jugar.setEnabled(false);
         Btn_Jugar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_JugarMouseClicked(evt);
             }
         });
-        jPanel1.add(Btn_Jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 120, 110));
+        jPanel1.add(Btn_Jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, 110));
 
         Btn_rifa.setBackground(new java.awt.Color(0, 51, 102));
         Btn_rifa.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         Btn_rifa.setForeground(new java.awt.Color(255, 255, 255));
         Btn_rifa.setText("Rifa");
-        Btn_rifa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_rifaMouseClicked(evt);
+        Btn_rifa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_rifaActionPerformed(evt);
             }
         });
         jPanel1.add(Btn_rifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
@@ -233,7 +253,29 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
         jPanel1.add(lb_Ficha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 90, 80));
         jPanel1.add(Lb_Ficha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 80, 80));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, -1));
+        btn_Jugar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Jugar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/button-play.png"))); // NOI18N
+        btn_Jugar.setEnabled(false);
+        btn_Jugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_JugarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_Jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 130, 110));
+
+        Btn_Salir.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/BotonSalirSinTexto.png"))); // NOI18N
+        Btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 30, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 350));
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,47 +308,121 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
         Cbx_ListaJ3.enable(false);
     }//GEN-LAST:event_Rdb_NuevoJugador3ActionPerformed
 
-    private void Btn_rifaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_rifaMouseClicked
-
-        int rifa = (int) (Math.random() * 6);
-
-        conexionDB cone = new conexionDB();
-        cone.conexionDB();
-        String pribe = "manuel";
-        int gane = 2;
-        int perdida = 3;
-        int empate = 4;
-        cone.InsertarJugador(pribe, gane, perdida, empate);
-    }//GEN-LAST:event_Btn_rifaMouseClicked
-
     private void Btn_JugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_JugarMouseClicked
-        if (Rdb_ListaJugador2.isSelected()) {
-            jugador.jugador1.Nombre = txt_NuevoJugador2.getText();
-        }
-        else if (Rdb_NuevoJugador2.isSelected()) {
-            jugador.jugador1.Nombre = txt_NuevoJugador2.getText();
-        }
-        else if (Rdb_ListaJugador3.isSelected()) {
-            jugador.jugador2.Nombre = txt_NuevoJugador2.getText();
-        }
-        else if (Rdb_NuevoJugador3.isSelected()) {
-            jugador.jugador2.Nombre = txt_NuevoJugador3.getText();
-        }
-        
 
     }//GEN-LAST:event_Btn_JugarMouseClicked
+
+    private void Btn_rifaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_rifaActionPerformed
+        int Jugador1;
+        int Jugador2;
+        Jugador1 = (int) (Math.random() * (6 - 1) + 1);
+        Jugador2 = (int) (Math.random() * (6 - 1) + 1);
+        if (Jugador1 == 1) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/1.png")));
+        }
+        if (Jugador1 == 2) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/2.png")));
+        }
+        if (Jugador1 == 3) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/3.png")));
+        }
+        if (Jugador1 == 4) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/4.png")));
+        }
+        if (Jugador1 == 5) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/5.png")));
+        }
+        if (Jugador1 == 6) {
+            LB_rifa1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/6.png")));
+        }
+        if (Jugador2 == 1) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/1.png")));
+        }
+        if (Jugador2 == 2) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/2.png")));
+        }
+        if (Jugador2 == 3) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/3.png")));
+        }
+        if (Jugador2 == 4) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/4.png")));
+        }
+        if (Jugador2 == 5) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/5.png")));
+        }
+        if (Jugador2 == 6) {
+            LB_rifa2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/6.png")));
+        }
+        if (Jugador1 > Jugador2) {
+            lb_Ficha1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/x gato.png")));
+            Lb_Ficha2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/Ogato.png")));
+            jugador.TurnoJ1 = true;
+        }
+        if (Jugador1 < Jugador2) {
+            Lb_Ficha2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/x gato.png")));
+            lb_Ficha1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/Ogato.png")));
+                jugador.TurnoJ2 = true;
+        }
+        if (Jugador1 == Jugador2) {
+            lb_Ficha1.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/x gato.png")));
+            Lb_Ficha2.setIcon(new ImageIcon(this.getClass().getResource("/Recursos/Ogato.png")));
+           jugador.TurnoJ1 = true;
+        }
+        btn_Jugar.setEnabled(true);
+        Btn_rifa.setEnabled(false);
+    }//GEN-LAST:event_Btn_rifaActionPerformed
+
+    private void btn_JugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_JugarActionPerformed
+         boolean entrar = false;
+        ImageIcon Img1 = (ImageIcon) lb_Ficha1.getIcon();
+        ImageIcon Img2 = (ImageIcon) Lb_Ficha2.getIcon();
+           if (Rdb_ListaJugador2.isSelected()==false && Rdb_NuevoJugador2.isSelected()==false  ) {
+            JOptionPane.showMessageDialog(this, "Seleccione una de las opciones del Jugagor 1 ", "Error", JOptionPane.ERROR_MESSAGE);}
+          else if (Rdb_ListaJugador3.isSelected()==false && Rdb_NuevoJugador3.isSelected()==false  ) {
+            JOptionPane.showMessageDialog(this, "Seleccione una de las opciones del Jugagor 2 ", "Error", JOptionPane.ERROR_MESSAGE);}
+            else if (Rdb_NuevoJugador2.isSelected() && txt_NuevoJugador2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nombre del jugador 1 ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (Rdb_NuevoJugador3.isSelected() && txt_NuevoJugador3.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nombre del jugador 2", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (Rdb_ListaJugador2.isSelected() && Rdb_ListaJugador3.isSelected()) {
+            jugador.IniciarJuego(Cbx_ListaJ2.getSelectedItem().toString(), Cbx_ListaJ3.getSelectedItem().toString(), Img1, Img2);
+        entrar = true;
+        } else if (Rdb_NuevoJugador2.isSelected() && Rdb_NuevoJugador3.isSelected()) {
+            jugador.IniciarJuego(txt_NuevoJugador2.getText(), txt_NuevoJugador3.getText(), Img1, Img2);
+         entrar = true;
+        } else if (Rdb_ListaJugador2.isSelected() && Rdb_NuevoJugador3.isSelected()) {
+            jugador.IniciarJuego(Cbx_ListaJ2.getSelectedItem().toString(), txt_NuevoJugador3.getText(), Img1, Img2);
+         entrar = true;
+        } else if (Rdb_ListaJugador3.isSelected() && Rdb_NuevoJugador2.isSelected()) {
+            jugador.IniciarJuego(Cbx_ListaJ3.getSelectedItem().toString(), txt_NuevoJugador2.getText(), Img1, Img2);
+       entrar = true;
+        }
+       if (entrar ==true){
+        Frm_Jugando frmPerfil = new Frm_Jugando();
+        MDI_Gato.desktopPane.add(frmPerfil);
+        frmPerfil.toFront();
+        frmPerfil.setVisible(true);
+        this.dispose();
+       }
+    }//GEN-LAST:event_btn_JugarActionPerformed
+
+    private void Btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirActionPerformed
+       this.dispose();
+       
+    }//GEN-LAST:event_Btn_SalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Btn_Jugar;
-    private javax.swing.JButton Btn_rifa;
+    private javax.swing.JButton Btn_Salir;
+    public javax.swing.JButton Btn_rifa;
     private javax.swing.JComboBox<String> Cbx_ListaJ1;
     private javax.swing.JComboBox<String> Cbx_ListaJ2;
     private javax.swing.JComboBox<String> Cbx_ListaJ3;
+    private javax.swing.JLabel LB_rifa1;
+    private javax.swing.JLabel LB_rifa2;
     private javax.swing.JLabel Lb_Ficha2;
     private javax.swing.JLabel Lb_rifa1;
-    private javax.swing.JLabel Lb_rifa2;
-    private javax.swing.JLabel Lb_rifa3;
     private javax.swing.JPanel Panel_jugador1;
     private javax.swing.JPanel Panel_jugador2;
     private javax.swing.JPanel Panel_jugador3;
@@ -316,13 +432,20 @@ public class Frm_NuevoJuego extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton Rdb_NuevoJugador1;
     private javax.swing.JRadioButton Rdb_NuevoJugador2;
     private javax.swing.JRadioButton Rdb_NuevoJugador3;
+    private javax.swing.JButton btn_Jugar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private java.util.List<Gato.Logica.Jugadores_1> jugadores_1List;
+    private java.util.List<Gato.Logica.Jugadores_1> jugadores_1List1;
+    private javax.persistence.Query jugadores_1Query;
+    private javax.persistence.Query jugadores_1Query1;
     private javax.swing.JLabel lb_Ficha1;
     private javax.swing.JTextField txt_NuevoJugador1;
     private javax.swing.JTextField txt_NuevoJugador2;
     private javax.swing.JTextField txt_NuevoJugador3;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
