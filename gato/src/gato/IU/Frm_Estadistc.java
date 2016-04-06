@@ -1,21 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gato.IU;
+
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Cristiam
  */
 public class Frm_Estadistc extends javax.swing.JInternalFrame {
+/*
+    Creo un nuevo archivo .txt y se doy la ruta de ubicacion si ya existe reecribo el archivo
+    y lo lleno con los datos del Jtable mediante For que recorre cada row y columna que tiene 
+    */
+   public void CrearTxt() throws IOException{
 
-    /**
-     * Creates new form Frm_Estadistc
-     */
+       File file = new File("C:\\Users\\Public\\Documents\\Estadistica.txt");
+       
+       if(!file.exists()){
+           file.createNewFile();
+       }
+       FileWriter fw = new FileWriter(file.getAbsoluteFile());
+       BufferedWriter bw = new BufferedWriter(fw);
+  
+           bw.write("Jugador    Ganes   Empates   Perdidas\n");
+       for (int i = 0; i < jTable1.getRowCount() ;i++){
+         for (int j = 0; j < jTable1.getColumnCount(); j++){
+             bw.write(jTable1.getModel().getValueAt(i, j)+"        ");
+         }
+         bw.write("\n");
+       }
+       bw.close();
+       fw.close();
+       JOptionPane.showMessageDialog(null, "Archivo Gurardo" );
+   
+   }
+   
+   
     public Frm_Estadistc() {
         initComponents();
+        
+
     }
 
     /**
@@ -31,6 +59,8 @@ public class Frm_Estadistc extends javax.swing.JInternalFrame {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("JIMENEZ:1433;databaseName=GatoPU").createEntityManager();
         jugadores_1Query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT j FROM Jugadores_1 j");
         jugadores_1List = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : jugadores_1Query.getResultList();
+        jugadores_1Query1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT j FROM Jugadores_1 j");
+        jugadores_1List1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : jugadores_1Query1.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -38,6 +68,7 @@ public class Frm_Estadistc extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Btn_Salir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -47,28 +78,22 @@ public class Frm_Estadistc extends javax.swing.JInternalFrame {
         jTable1.setAlignmentX(1.0F);
         jTable1.setAlignmentY(1.0F);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jugadores_1List, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jugadores_1List1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${jugador}"));
         columnBinding.setColumnName("Jugador");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ganes}"));
         columnBinding.setColumnName("Ganes");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${perdidas}"));
-        columnBinding.setColumnName("Perdidas");
-        columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${empates}"));
         columnBinding.setColumnName("Empates");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${perdidas}"));
+        columnBinding.setColumnName("Perdidas");
         columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Jugador");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Ganes");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Perdidas");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Empates");
-        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 47, 560, 160));
 
@@ -93,13 +118,23 @@ public class Frm_Estadistc extends javax.swing.JInternalFrame {
                 Btn_SalirActionPerformed(evt);
             }
         });
-        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 30, 30));
+        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 30, 30));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icon txt.PNG"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 70, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,13 +151,22 @@ public class Frm_Estadistc extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_SalirMouseClicked
 
     private void Btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirActionPerformed
-this.dispose();
+   this.dispose();
     }//GEN-LAST:event_Btn_SalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try {
+           CrearTxt();
+       } catch (IOException ex) {
+           Logger.getLogger(Frm_Estadistc.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Salir;
     private javax.persistence.EntityManager entityManager;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -130,7 +174,9 @@ this.dispose();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.util.List<Gato.Logica.Jugadores_1> jugadores_1List;
+    private java.util.List<Gato.Logica.Jugadores_1> jugadores_1List1;
     private javax.persistence.Query jugadores_1Query;
+    private javax.persistence.Query jugadores_1Query1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

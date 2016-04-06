@@ -8,7 +8,7 @@ package Gato.Logica;
 import javax.swing.ImageIcon;
 
 /**
- *
+ *Clase de los jugadores con sus atributos y su respectivo set y get
  * @author Cristiam
  */
 public class Jugadores {
@@ -17,7 +17,7 @@ public class Jugadores {
     public int GANADOS;
     public int PERDIDOS;
     public int EMPATADOS;
-      public ImageIcon Imagen;
+   public ImageIcon Imagen;
   public Jugadores( ) {}
 
     public Jugadores(String Nombre, ImageIcon Imagen ) {
@@ -67,13 +67,21 @@ public class Jugadores {
     public ImageIcon getImagen() {
         return Imagen;
     }
-  
+  /*
+    suma a las patidas ganadas 
+    */
      public void gano(){
         GANADOS ++;
     }
+     /*
+      suma a las patidas Perdidas
+     */ 
     public void perdio(){
         PERDIDOS ++;
     }
+    /*
+      suma a las patidas que empato
+    */
     public void empato(){
         EMPATADOS ++;
     }

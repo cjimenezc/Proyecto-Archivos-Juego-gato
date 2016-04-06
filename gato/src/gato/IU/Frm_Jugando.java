@@ -1,27 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gato.IU;
 
 import Gato.Logica.Gato_Metodos;
 import Gato.Logica.conexionDB;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
- *
+ *Formulario de juego donde se llama a los diferentes metodos para realizar las validaciones
  * @author Cristiam
  */
 public class Frm_Jugando extends javax.swing.JInternalFrame {
 
-    conexionDB cone = new conexionDB();
-    Gato_Metodos Metodos = Frm_NuevoJuego.jugador;
+    public static conexionDB cone = new conexionDB();//Instancia de la Clase Conexion
+    Gato_Metodos Metodos = Frm_NuevoJuego.Metodos;//Instancia de la Clase Gato_Metodos Iniciada en la Clase Frm_NuevoJuego
 
-    /**
-     * Creates new form Frm_Jugando
-     */
+    /*
+    Metodo que se utiliza si se va a cargar una partida almacenda donde verifica el varlor en cada campo de la matriz
+    para mostrar la imagen correspondiente a cada ficha
+    */
+    public void Cargar_Tablero() {
+            if (Metodos.tablero[1] == 1) {
+                F1.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[2] == 1) {
+                F2.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[3] == 1) {
+                F3.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[4] == 1) {
+                F4.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[5] == 1) {
+                F5.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[6] == 1) {
+                F6.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[7] == 1) {
+                F1.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[8] == 1) {
+                F8.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[9] == 1) {
+                F9.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[1] == 2) {
+                F1.setIcon(Metodos.jugador2.Imagen);
+            }
+            if (Metodos.tablero[2] == 2) {
+                F2.setIcon(Metodos.jugador2.Imagen);
+            }
+            if (Metodos.tablero[3] == 2) {
+                F3.setIcon(Metodos.jugador2.Imagen);
+            }
+             if (Metodos.tablero[4] == 2) {
+                F4.setIcon(Metodos.jugador1.Imagen);
+            }
+            if (Metodos.tablero[5] == 2) {
+                F5.setIcon(Metodos.jugador2.Imagen);
+            }
+            if (Metodos.tablero[6] == 2) {
+                F6.setIcon(Metodos.jugador2.Imagen);
+            }
+             if (Metodos.tablero[7] == 2) {
+                F7.setIcon(Metodos.jugador2.Imagen);
+            }
+            if (Metodos.tablero[8] == 2) {
+                F8.setIcon(Metodos.jugador2.Imagen);
+            }
+            if (Metodos.tablero[9] == 2) {
+                F9.setIcon(Metodos.jugador2.Imagen);
+            }
+               Metodos.EstaJugando = true;
+    }
+/*
+    Limpia mediate un ciclo el arreglo y la imagen de cada label
+    */
     public void LimpiarTablero() {
         for (int i = 0; i < Metodos.tablero.length; i++) {
             Metodos.tablero[i] = 0;
@@ -38,7 +95,9 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
         Metodos.Termino = false;
 
     }
-
+/*
+    Carga los datos almacenados en cada uno de los jugadores de la estadistica actual del juego
+    */
     public void CargarPantalla() {
         LbJugador1.setText(Metodos.jugador1.Nombre);
         LbJugador2.setText(Metodos.jugador2.Nombre);
@@ -52,7 +111,9 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
         Lb_perdidos2.setText(Integer.toString(Metodos.jugador2.PERDIDOS));
 
     }
-
+/*
+    
+    */
     public void TurnoDe() {
         if (Metodos.TurnoJ1 == true) {
             Lb_Mensaje.setText("TURNO DE: " + Metodos.jugador1.Nombre);
@@ -88,34 +149,36 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
                     Metodos.Termino = true;
                     Metodos.TurnoJ1 = true;
                     Metodos.TurnoJ2 = false;
-                   CargarPantalla();
-                }
-             else {
-                Metodos.jugador2.gano();
-                Metodos.jugador1.perdio();
-                Lb_Mensaje.setText("Ganó " + Metodos.jugador2.Nombre);
-                Metodos.Termino = true;
-                Metodos.TurnoJ1 = false;
-                Metodos.TurnoJ2 = true;
-                CargarPantalla();
-                    
-            }     
-            }
-            else if (Metodos.TableroLleno()) {
-                    Metodos.jugador1.empato();
-                    Metodos.jugador2.empato();
-                    Lb_Mensaje.setText("Empate");
+                    CargarPantalla();
+                    return;
+                } else {
+                    Metodos.jugador2.gano();
+                    Metodos.jugador1.perdio();
+                    Lb_Mensaje.setText("Ganó " + Metodos.jugador2.Nombre);
                     Metodos.Termino = true;
+                    Metodos.TurnoJ1 = false;
+                    Metodos.TurnoJ2 = true;
                     CargarPantalla();
                     return;
                 }
-                TurnoDe();
-            
+            } else if (Metodos.TableroLleno()) {
+                Metodos.jugador1.empato();
+                Metodos.jugador2.empato();
+                Lb_Mensaje.setText("Empate");
+                Metodos.Termino = true;
+                CargarPantalla();
+                return;
+            }
+            TurnoDe();
+
         }
     }
 
     public Frm_Jugando() {
         initComponents();
+        if (Metodos.jugador1.Nombre != "") {
+            Cargar_Tablero();
+        }
         CargarPantalla();
         TurnoDe();
     }
@@ -161,7 +224,6 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
         Lb_Mensaje = new javax.swing.JLabel();
         Btn_SalirJuego = new javax.swing.JButton();
         Lb_FichaJ3 = new javax.swing.JLabel();
-        Btn_SalirJuego1 = new javax.swing.JButton();
 
         Panel_Juego.setBackground(new java.awt.Color(255, 255, 255));
         Panel_Juego.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -451,22 +513,11 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
         Panel_Juego.add(Btn_SalirJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 30, 30));
         Panel_Juego.add(Lb_FichaJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
 
-        Btn_SalirJuego1.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_SalirJuego1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/BotonSalirSinTexto.png"))); // NOI18N
-        Btn_SalirJuego1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_SalirJuego1ActionPerformed(evt);
-            }
-        });
-        Panel_Juego.add(Btn_SalirJuego1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel_Juego, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+            .addComponent(Panel_Juego, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,46 +564,15 @@ public class Frm_Jugando extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_F7MouseClicked
 
     private void Btn_SalirJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirJuegoActionPerformed
-        cone.conexionDB();
- if (cone.Buscar_Jugador(Metodos.jugador1.Nombre) == true && cone.Buscar_Jugador(Metodos.jugador2.Nombre) == true) {
-                        cone.ActualizarJugador1();
-                         cone.ActualizarJugador2();
-                        CargarPantalla();
-                       
-                    } else if (cone.Buscar_Jugador(Metodos.jugador1.Nombre) == true && cone.Buscar_Jugador(Metodos.jugador2.Nombre) == false) {
-                        cone.ActualizarJugador1();
-                        cone.InsertarJugador2();
-                        CargarPantalla();
-                       
-                    } else if (cone.Buscar_Jugador(Metodos.jugador1.Nombre) == false && cone.Buscar_Jugador(Metodos.jugador2.Nombre) == false) {
-                        cone.InsertarJugador1();
-                        cone.InsertarJugador2();
-                        CargarPantalla();
-                       }
-                    else if (cone.Buscar_Jugador(Metodos.jugador1.Nombre) == false && cone.Buscar_Jugador(Metodos.jugador2.Nombre) == true) {
-                        cone.InsertarJugador1();
-                        cone.ActualizarJugador2();
-                        CargarPantalla();
-                      
-                    } 
-        conexionDB cone = new conexionDB();
-        cone.conexionDB();
-
-        cone.InsertarPartida();
-this.dispose();
+        Metodos.SalirGuardar();
+      Metodos.FrmEstado = false;
+        LimpiarTablero();
+        this.dispose();
     }//GEN-LAST:event_Btn_SalirJuegoActionPerformed
-
-    private void Btn_SalirJuego1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirJuego1ActionPerformed
-        cone.conexionDB();
-        cone.Seleccionar_Partida();
-        /* CargarPantalla();*/
-
-    }//GEN-LAST:event_Btn_SalirJuego1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_SalirJuego;
-    private javax.swing.JButton Btn_SalirJuego1;
     private javax.swing.JLabel F1;
     private javax.swing.JLabel F2;
     private javax.swing.JLabel F3;
